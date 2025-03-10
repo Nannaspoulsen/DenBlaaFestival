@@ -93,9 +93,9 @@ const events = [
 ];
 
 // Finder det sted på websiden hvor events skal vises
-const eventsContainer = document.querySelector("#events-container");
+const eventsContainer = document.querySelector("#events-container1");
 
-// Gennemgår hver eneste event fra min liste
+// Gennemgår hver eneste event fra arrayet
 events.forEach(function(event) {
   // Opretter en event-boks
   const eventDiv = document.createElement("div");

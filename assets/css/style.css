@@ -139,7 +139,8 @@ footer {
 /* Program-Lokation */
 
 /* Section 1 - Buttons for Program-Lokation*/
-.buttons-container {
+.ProgramButtons {
+  display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
@@ -164,6 +165,7 @@ footer {
   gap: 15px;
   padding: 20px;
   align-items: center;
+
 }
 
 .event-card {
@@ -171,7 +173,6 @@ footer {
   max-width: 350px;
   text-align: center;
   cursor: pointer;
-  border: 2px solid rgba(8, 43, 8, 0.367);
   border-radius: 8px;
   padding: 10px;
   background: white;
@@ -192,14 +193,15 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.398);
   backdrop-filter: blur(5px);
   justify-content: center;
   align-items: center;
 }
 
 .popup-indhold {
-  background-color: rgb(246, 241, 224);
+  background-color: rgb(108, 127, 160);
+  color: white;
   padding: 20px;
   text-align: center;
   max-width: 350px;
@@ -211,7 +213,7 @@ footer {
 .popup img {
   width: 100%;
   height: 250px;
-  object-fit: cover;
+  padding: 0%;
   border-radius: 8px;
 }
 
@@ -221,7 +223,7 @@ footer {
   right: 15px;
   font-size: 40px;
   cursor: pointer;
-  color: rgb(7, 40, 11);
+  color: rgba(255, 255, 255, 0.977);
 }
 
 
