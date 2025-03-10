@@ -1,4 +1,5 @@
-const events = [
+document.addEventListener("DOMContentLoaded", () => {
+    const events = [
   {
     spillested: "John Bull Pub",
     artist: "TogoRhino - African Blues",
@@ -78,17 +79,40 @@ const events = [
 //Vi kan også indsætte billede af hver artist i denne liste. Vi skal bare blive enige om, hvilket billede. 
 
 // Vi vil gruppere events efter spillested. Det gør vi med denne funktion, da vi får en liste af events og returnerer en liste af events grupperet efter spillested.
-function groupEventsByVenue(events) {
-    const grouped = {};
+// Funktion til at gruppere events efter spillested
+    function groupEventsByVenue(events) {
+        const grouped = {};
+        events.forEach(event => {
+            if (!grouped[event.spillested]) {
+                grouped[event.spillested] = [];
+            }
+            grouped[event.spillested].push(event);
+        });
+        return grouped;
+    }
 
-    events.forEach(event => {
-        if (!grouped[event.spillested]) {
-            grouped[event.spillested] = [];
+    // Finder containeren i HTML
+    const eventsContainer = document.querySelector("#eventsContainer");
+
+    if (eventsContainer) {
+        // Henter grupperede events
+        const groupedEvents = groupEventsByVenue(events);
+
+        // Looper igennem de grupperede events og opretter kort (cards)
+        for (const [spillested, eventList] of Object.entries(groupedEvents)) {
+            const card = document.createElement("div");
+            card.classList.add("event-card"); // CSS-klasse til styling
+
+            // Titel på spillested
+            let eventContent = `<h3>${spillested}</h3>`;
+
+            // Tilføjer alle events til kortet
+            eventList.forEach(event => {
+                eventContent += `<p><strong>${event.spilletid}:</strong> ${event.artist}</p>`;
+            });
+
+            card.innerHTML = eventContent;
+            eventsContainer.appendChild(card);
         }
-        grouped[event.spillested].push(event);
-    });
-
-    return grouped;
-}
-const eventsContainer = document.querySelector("#eventsContainer");
-
+    }
+});
