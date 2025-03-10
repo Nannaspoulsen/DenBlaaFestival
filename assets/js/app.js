@@ -90,5 +90,5 @@ function groupEventsByVenue(events) {
 
     return grouped;
 }
-const eventContainer = document.querySelector("#eventContainer");
+const eventsContainer = document.querySelector("#eventsContainer");
 
