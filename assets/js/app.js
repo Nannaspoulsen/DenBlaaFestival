@@ -75,4 +75,20 @@ const events = [
     spilletid: "Lørdag, kl. 22:00"
   }
 ];
+//Vi kan også indsætte billede af hver artist i denne liste. Vi skal bare blive enige om, hvilket billede. 
+
+// Vi vil gruppere events efter spillested. Det gør vi med denne funktion, da vi får en liste af events og returnerer en liste af events grupperet efter spillested.
+function groupEventsByVenue(events) {
+    const grouped = {};
+
+    events.forEach(event => {
+        if (!grouped[event.spillested]) {
+            grouped[event.spillested] = [];
+        }
+        grouped[event.spillested].push(event);
+    });
+
+    return grouped;
+}
+const eventContainer = document.querySelector("#eventContainer");
 
