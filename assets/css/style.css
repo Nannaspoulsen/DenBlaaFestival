@@ -1,23 +1,256 @@
-/* Typografi */
-@import url("https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap");
-
-/* Variables */
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  background-color: #DCF2FD;
 }
 
-:root {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
+  text-align: left;
 }
 
-/* General styling */
-/* Header */
-/* Navbar */
+p {
+  text-align: left;
+  padding: 0;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------- */
+/* FORSIDE */
+/* ---------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------- */
+/* Hero Picture */
+header {
+  width: 100vw;
+  height: 35vh;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------- */
+/* SECTION 1 */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+/* --------------------------------------------------------------- */
+/* SECTION 2 */
+h2 {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+
+section {
+  display: flex;
+  margin: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 4rem;
+}
+
+.events-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.event-img {
+  flex: 0 0 auto;
+  width: 250px;
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 6px 6px 10px rgba(2, 2, 2, 0.4);
+}
+
+.event-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+/* Gemmer Scrollbaren til at slide igennem billederne */
+/* .events-container::-webkit-scrollbar {
+    display: none;
+} */
+
+/* ---------------------------------------------------------------- */
 /* Footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0;
+}
 
+.FooterLogo {
+  width: 100px;
+  height: 80px;
+}
 
+.FooterLogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-/* ================================
-  MEDIA QUERIES
-  ================================ */
+.logos {
+  display: flex;
+  justify-content: space-around;
+  width: 8rem;
+}
+
+.logo {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------- */
+/* Program-Lokation */
+/* ---------------------------------------------------------------- */
+/* Header */
+header {
+  width: 100vw;
+  height: 35vh;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------------------------------------------------------- */
+/* Section 1 - Buttons for Program-Lokation*/
+.buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.oval-button {
+  padding: 0.4rem 1.2rem;
+  font-size: 0.8em;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-radius: 30px;
+  border: 1.5px solid #000000;
+}
+
+/* ---------------------------------------------------------------- */
+/* Section 2 - ProgramCards*/
+.ProgramCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.artist-card {
+  width: 250px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 6px 6px 10px rgba(2, 2, 2, 0.4);
+}
+
+.artist-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.artist-card h3 {
+  font-size: 1.2em;
+  margin: 1rem 0;
+}
+
+.artist-card p {
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.artist-card button {
+  float: right;
+  padding: 0.5 1rem;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-radius: 50px;
+  font-size: 1em;
+  margin-left: 0.5rem;
+}
+
+/* ---------------------------------------------------------------- */
+.ArtistPopUp {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.artistPopUpCard {
+  width: 320px;
+  background-color: #ffffff;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 6px 6px 10px rgba(2, 2, 2, 0.4);
+}
+
+.artistPopUpCard img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.aartistPopUpCard h3 {
+  font-size: 1.2em;
+  margin: 1rem 0;
+}
+
+.artistPopUpCard p {
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.artistPopUpCard button {
+  float: right;
+  padding: 0.5 1rem;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-radius: 50px;
+  font-size: 1em;
+  margin-left: 0.5rem;
+}
