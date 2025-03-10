@@ -54,7 +54,7 @@ main {
 
 /* --------------------------------------------------------------- */
 /* SECTION 2 */
-h2 {
+.section h2 {
   font-size: 1.5rem;
   margin: 1rem;
 }
@@ -253,4 +253,14 @@ header img {
   border-radius: 50px;
   font-size: 1em;
   margin-left: 0.5rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* Praktisk Info & Kontakt */
+/* ---------------------------------------------------------------- */
+
+/* Section med Kontakt */
+#PraktiskInfo{
+display: block;
+margin-inline:3rem  ;
 }
