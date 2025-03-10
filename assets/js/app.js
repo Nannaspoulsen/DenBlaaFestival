@@ -130,4 +130,31 @@ document.addEventListener("DOMContentLoaded", () => {
             eventsContainer.appendChild(card);
         }
     }
+        const artistContainer = document.getElementById("artist-container");
+
+    if (!artistContainer) {
+        console.error("Elementet #artist-container blev ikke fundet!");
+    } else {
+  // Fjern dubletter og sorter alfabetisk
+    const uniqueArtists = [...new Map(events.map(event => [event.artist, event])).values()].sort((a, b) => a.artist.localeCompare(b.artist));
+
+    // Opret kort til hver artist
+    uniqueArtists.forEach(({ artist, image }) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const img = document.createElement("img");
+        img.src = image;
+        // img.alt = artist;
+        img.classList.add("artist-image");
+
+        const name = document.createElement("p");
+        name.textContent = artist;
+
+        card.appendChild(img);
+        card.appendChild(name);
+        artistContainer.appendChild(card);
+    });
+};
 });
+
