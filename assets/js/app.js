@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const events = [
+const events = [
   {
     spillested: "John Bull Pub",
     artist: "TogoRhino - African Blues",
@@ -91,43 +90,66 @@ document.addEventListener("DOMContentLoaded", () => {
     beskrivelse: "Lorem Ipsum.........."
   }
 ];
-//Vi kan også indsætte billede af hver artist i denne liste. Vi skal bare blive enige om, hvilket billede. 
 
-// Vi vil gruppere events efter spillested. Det gør vi med denne funktion, da vi får en liste af events og returnerer en liste af events grupperet efter spillested.
-// Funktion til at gruppere events efter spillested
-    function groupEventsByVenue(events) {
-        const grouped = {};
+document.addEventListener("DOMContentLoaded", () => {
+const eventsContainer = document.getElementById("eventsContainer");
+
+    // Grupér events efter spillested
+    const groupedEvents = {};
+    events.forEach(event => {
+        if (!groupedEvents[event.spillested]) {
+            groupedEvents[event.spillested] = [];
+        }
+        groupedEvents[event.spillested].push(event);
+    });
+
+    // Opret kortene i HTML
+    for (const [spillested, events] of Object.entries(groupedEvents)) {
+        const spillestedDiv = document.createElement("div");
+        spillestedDiv.classList.add("spillested-card");
+
+        const spillestedHeader = document.createElement("h2");
+        spillestedHeader.textContent = spillested;
+        spillestedDiv.appendChild(spillestedHeader);
+
         events.forEach(event => {
-            if (!grouped[event.spillested]) {
-                grouped[event.spillested] = [];
-            }
-            grouped[event.spillested].push(event);
-        });
-        return grouped;
-    }
+            const eventDiv = document.createElement("div");
+            eventDiv.classList.add("event-card");
 
-    // Finder containeren i HTML
-    const eventsContainer = document.querySelector("#eventsContainer");
+            const artistLink = document.createElement("a");
+            artistLink.href = "#";
+            artistLink.textContent = event.artist;
+            artistLink.classList.add("artist-link");
 
-    if (eventsContainer) {
-        // Henter grupperede events
-        const groupedEvents = groupEventsByVenue(events);
-
-        // Looper igennem de grupperede events og opretter kort (cards)
-        for (const [spillested, eventList] of Object.entries(groupedEvents)) {
-            const card = document.createElement("div");
-            card.classList.add("event-card"); // CSS-klasse til styling
-
-            // Titel på spillested
-            let eventContent = `<h3>${spillested}</h3>`;
-
-            // Tilføjer alle events til kortet
-            eventList.forEach(event => {
-                eventContent += `<p><strong>${event.spilletid}:</strong> ${event.artist}</p>`;
+            artistLink.addEventListener("click", () => {
+                showPopup(event);
             });
 
-            card.innerHTML = eventContent;
-            eventsContainer.appendChild(card);
-        }
+            const spilletidP = document.createElement("p");
+            spilletidP.textContent = event.spilletid;
+
+            eventDiv.appendChild(artistLink);
+            eventDiv.appendChild(spilletidP);
+            spillestedDiv.appendChild(eventDiv);
+        });
+
+        eventsContainer.appendChild(spillestedDiv);
     }
+
+    // Popup funktioner
+    function showPopup(event) {
+        document.getElementById("popup-artist").textContent = event.artist;
+        document.getElementById("popup-spillested").textContent = "Spillested: " + event.spillested;
+        document.getElementById("popup-spilletid").textContent = "Spilletid: " + event.spilletid;
+        document.getElementById("popup-beskrivelse").textContent = event.beskrivelse;
+        document.getElementById("popup").style.display = "block";
+    }
+
+    document.getElementById("popup-luk-btn").addEventListener("click", () => {
+        document.getElementById("popup").style.display = "none";
+    });
+
+    document.getElementById("popup-luk").addEventListener("click", () => {
+        document.getElementById("popup").style.display = "none";
+    });
 });
