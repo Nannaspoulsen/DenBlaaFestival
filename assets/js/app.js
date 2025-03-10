@@ -3,7 +3,8 @@ const events = [
     spillested: "John Bull Pub",
     artist: "TogoRhino - African Blues",
     spilletid: "Fredag, kl. 23:00",
-    beskrivelse: "Lorem Ipsum.........."
+    beskrivelse: "Lorem Ipsum..........",
+    billede: "./assets/img/img1163.jpg"
   },
   {
     spillested: "John Bull Pub",
@@ -91,65 +92,50 @@ const events = [
   }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-const eventsContainer = document.getElementById("eventsContainer");
+// Finder det sted på websiden hvor events skal vises
+const eventsContainer = document.querySelector("#events-container");
 
-    // Grupér events efter spillested
-    const groupedEvents = {};
-    events.forEach(event => {
-        if (!groupedEvents[event.spillested]) {
-            groupedEvents[event.spillested] = [];
-        }
-        groupedEvents[event.spillested].push(event);
-    });
+// Gennemgår hver eneste event fra min liste
+events.forEach(function(event) {
+  // Opretter en event-boks
+  const eventDiv = document.createElement("div");
+  eventDiv.classList.add("event-card"); // Tilføjer klasse til styling
+  eventDiv.innerHTML = `
+      <h3>${event.artist}</h3>
+      <p>${event.spillested} - ${event.spilletid}</p>
+  `;
 
-    // Opret kortene i HTML
-    for (const [spillested, events] of Object.entries(groupedEvents)) {
-        const spillestedDiv = document.createElement("div");
-        spillestedDiv.classList.add("spillested-card");
+  // Når brugeren klikker på event-boksen, vis popup
+  eventDiv.addEventListener("click", function() {
+    showPopup(event);
+  });
 
-        const spillestedHeader = document.createElement("h2");
-        spillestedHeader.textContent = spillested;
-        spillestedDiv.appendChild(spillestedHeader);
+  // Tilføjer eventDiv til eventsContainer
+  eventsContainer.appendChild(eventDiv);
+});
 
-        events.forEach(event => {
-            const eventDiv = document.createElement("div");
-            eventDiv.classList.add("event-card");
+// Funktion der viser popup med event-detaljer
+function showPopup(event) {
+  // Gør popup'en synlig
+  document.querySelector("#popup").style.display = "flex";
 
-            const artistLink = document.createElement("a");
-            artistLink.href = "#";
-            artistLink.textContent = event.artist;
-            artistLink.classList.add("artist-link");
+  // Sætter event-detaljer ind i popup
+  document.querySelector("#popup-artist").textContent = event.artist;
+  document.querySelector("#popup-spillested").textContent = "Spillested: " + event.spillested;
+  document.querySelector("#popup-spilletid").textContent = "Spilletid: " + event.spilletid;
+  document.querySelector("#popup-beskrivelse").textContent = event.beskrivelse;
 
-            artistLink.addEventListener("click", () => {
-                showPopup(event);
-            });
+  // Sætter billede, hvis der findes et
+  const popupBillede = document.querySelector("#popup-billede");
+  if (event.billede) {
+    popupBillede.src = event.billede;
+    popupBillede.style.display = "block";
+  } else {
+    popupBillede.style.display = "none";
+  }
+}
 
-            const spilletidP = document.createElement("p");
-            spilletidP.textContent = event.spilletid;
-
-            eventDiv.appendChild(artistLink);
-            eventDiv.appendChild(spilletidP);
-            spillestedDiv.appendChild(eventDiv);
-        });
-
-        eventsContainer.appendChild(spillestedDiv);
-    }
-
-    // Popup funktioner
-    function showPopup(event) {
-        document.getElementById("popup-artist").textContent = event.artist;
-        document.getElementById("popup-spillested").textContent = "Spillested: " + event.spillested;
-        document.getElementById("popup-spilletid").textContent = "Spilletid: " + event.spilletid;
-        document.getElementById("popup-beskrivelse").textContent = event.beskrivelse;
-        document.getElementById("popup").style.display = "block";
-    }
-
-    document.getElementById("popup-luk-btn").addEventListener("click", () => {
-        document.getElementById("popup").style.display = "none";
-    });
-
-    document.getElementById("popup-luk").addEventListener("click", () => {
-        document.getElementById("popup").style.display = "none";
-    });
+// Luk popup når man klikker på krydset
+document.querySelector("#popup-luk").addEventListener("click", function () {
+  document.querySelector("#popup").style.display = "none";
 });
