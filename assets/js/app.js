@@ -3,7 +3,7 @@ const events = [
     spillested: "John Bull Pub",
     artist: "TogoRhino - African Blues",
     spilletid: "Fredag, kl. 23:00",
-    beskrivelse: "Lorem Ipsum..........",
+    beskrivelse: "Beskrivelse af bandet.......",
     billede: "./assets/img/img1163.jpg"
   },
   {
@@ -109,8 +109,6 @@ events.forEach(function(event) {
   eventDiv.addEventListener("click", function() {
     showPopup(event);
   });
-
-  // Tilføjer eventDiv til eventsContainer
   eventsContainer.appendChild(eventDiv);
 });
 
@@ -125,7 +123,7 @@ function showPopup(event) {
   document.querySelector("#popup-spilletid").textContent = "Spilletid: " + event.spilletid;
   document.querySelector("#popup-beskrivelse").textContent = event.beskrivelse;
 
-  // Sætter billede, hvis der findes et
+  // Sætter billede, hvis der findes et (findes ikke på alle artister)
   const popupBillede = document.querySelector("#popup-billede");
   if (event.billede) {
     popupBillede.src = event.billede;
