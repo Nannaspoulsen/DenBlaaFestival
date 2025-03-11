@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Opret kortene i HTML
     for (const [spillested, eventList] of Object.entries(groupedEvents)) {
         const spillestedDiv = document.createElement("div");
-        spillestedDiv.classList.add("spillested-card");
+        spillestedDiv.classList.add("event-card");
 
         const spillestedHeader = document.createElement("h2");
         spillestedHeader.textContent = spillested;
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         eventList.forEach(event => {
             const eventDiv = document.createElement("div");
-            eventDiv.classList.add("event-card");
+            // eventDiv.classList.add("event-card");
 
             const artistLink = document.createElement("a");
             artistLink.href = "#";
@@ -140,5 +140,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         eventsContainer.appendChild(spillestedDiv);
     }
-
-  })
+   // Popup funktioner
+   function showPopup(event) {
+      document.getElementById("popup-billede").src = event.billede;
+      document.getElementById("popup-artist").textContent = event.artist;
+        document.getElementById("popup-spillested").textContent = "Spillested: " + event.spillested;
+        document.getElementById("popup-spilletid").textContent = "Spilletid: " + event.spilletid;
+        document.getElementById("popup-beskrivelse").textContent = event.beskrivelse;
+        document.getElementById("popup").style.display = "block";
+    }
+ 
+    document.getElementById("popup-luk").addEventListener("click", () => {
+        document.getElementById("popup").style.display = "none";
+    });
+ 
+    document.getElementById("popup-luk").addEventListener("click", () => {
+        document.getElementById("popup").style.display = "none";
+    });
+});
