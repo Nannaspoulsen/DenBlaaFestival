@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", () => {
 const events = [
   {
     spillested: "John Bull Pub",
@@ -92,79 +93,101 @@ const events = [
   }
 ];
 
-// Finder det sted på websiden hvor events skal vises
-const eventsContainer = document.querySelector("#events-container1");
-
-// Gennemgår hver eneste event fra arrayet
-events.forEach(function(event) {
-  // Opretter en event-boks
-  const eventDiv = document.createElement("div");
-  eventDiv.classList.add("event-card"); // Tilføjer klasse til styling
-  eventDiv.innerHTML = `
-      <h3>${event.artist}</h3>
-      <p>${event.spillested} - ${event.spilletid}</p>
-  `;
-
-  // Når brugeren klikker på event-boksen, vis popup
-  eventDiv.addEventListener("click", function() {
-    showPopup(event);
-  eventsContainer.appendChild(eventDiv);
-});
-
-// Funktion der viser popup med event-detaljer
-function showPopup(event) {
-  // Gør popup'en synlig
-  document.querySelector("#popup").style.display = "flex";
-
-  // Sætter event-detaljer ind i popup
-  document.querySelector("#popup-artist").textContent = event.artist;
-  document.querySelector("#popup-spillested").textContent = "Spillested: " + event.spillested;
-  document.querySelector("#popup-spilletid").textContent = "Spilletid: " + event.spilletid;
-  document.querySelector("#popup-beskrivelse").textContent = event.beskrivelse;
-
-  // Sætter billede, hvis der findes et (findes ikke på alle artister)
-  const popupBillede = document.querySelector("#popup-billede");
-  if (event.billede) {
-    popupBillede.src = event.billede;
-    popupBillede.style.display = "block";
-  } else {
-    popupBillede.style.display = "none";
-  }
+// Funktion til at gruppere events efter spillested
+function groupEventsByVenue(events) {
+    const grouped = {};
+    events.forEach(event => {
+        if (!grouped[event.spillested]) {
+            grouped[event.spillested] = [];
+        }
+        grouped[event.spillested].push(event);
+    });
+    return grouped;
 }
 
-// Luk popup når man klikker på krydset
-document.querySelector("#popup-luk").addEventListener("click", function () {
-  document.querySelector("#popup").style.display = "none";
-});
+// Finder containeren i HTML
+const eventsContainer = document.querySelector("#eventsContainer");
 
+if (eventsContainer) {
+    // Henter grupperede events
+    const groupedEvents = groupEventsByVenue(events);
+
+    // Looper igennem de grupperede events og opretter kort (cards)
+    for (const [spillested, eventList] of Object.entries(groupedEvents)) {
+        const card = document.createElement("div");
+        card.classList.add("event-card"); // CSS-klasse til styling
+
+        // Her kan du tilføje yderligere kode til at fylde kortet med event-detaljer
+        // For eksempel:
+        // const title = document.createElement("h3");
+        // title.textContent = eventList[0].spillested;
+        // card.appendChild(title);
+
+        eventsContainer.appendChild(card);
+    }
+}
 
 //Christoffers artist kode
 
 const artistContainer = document.getElementById("artist-container");
- 
-     if (!artistContainer) {
-         console.error("Elementet #artist-container blev ikke fundet!");
-     } else {
-   // Fjern dubletter og sorter alfabetisk
-     const uniqueArtists = [...new Map(events.map(event => [event.artist, event])).values()].sort((a, b) => a.artist.localeCompare(b.artist));
- 
-     // Opret kort til hver artist
-     uniqueArtists.forEach(({ artist, image }) => {
-         const card = document.createElement("div");
-         card.classList.add("card");
- 
-         const img = document.createElement("img");
-         img.src = image;
-         // img.alt = artist;
-         img.classList.add("artist-image");
- 
-         const name = document.createElement("p");
-         name.textContent = artist;
- 
-         card.appendChild(img);
-         card.appendChild(name);
-         artistContainer.appendChild(card);
-     });
- };
+
+if (!artistContainer) {
+    console.error("Elementet #artist-container blev ikke fundet!");
+} else {
+    // Fjern dubletter og sorter alfabetisk
+    const uniqueArtists = [...new Map(events.map(event => [event.artist, event])).values()].sort((a, b) => a.artist.localeCompare(b.artist));
+
+    // Opret kort til hver artist
+    uniqueArtists.forEach(({ artist, billede }) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const img = document.createElement("img");
+        img.src = billede;
+        // img.alt = artist;
+        img.classList.add("artist-image");
+
+        const name = document.createElement("p");
+        name.textContent = artist;
+
+        card.appendChild(img);
+        card.appendChild(name);
+        artistContainer.appendChild(card);
+    });
+}
+
+//   // Når brugeren klikker på event-boksen, vis popup
+//   eventDiv.addEventListener("click", function() {
+//     showPopup(event);
+//   eventsContainer.appendChild(eventDiv);
+// });
+
+// // Funktion der viser popup med event-detaljer
+// function showPopup(event) {
+//   // Gør popup'en synlig
+//   document.querySelector("#popup").style.display = "flex";
+
+//   // Sætter event-detaljer ind i popup
+//   document.querySelector("#popup-artist").textContent = event.artist;
+//   document.querySelector("#popup-spillested").textContent = "Spillested: " + event.spillested;
+//   document.querySelector("#popup-spilletid").textContent = "Spilletid: " + event.spilletid;
+//   document.querySelector("#popup-beskrivelse").textContent = event.beskrivelse;
+
+//   // Sætter billede, hvis der findes et (findes ikke på alle artister)
+//   const popupBillede = document.querySelector("#popup-billede");
+//   if (event.billede) {
+//     popupBillede.src = event.billede;
+//     popupBillede.style.display = "block";
+//   } else {
+//     popupBillede.style.display = "none";
+//   }
+// }
+
+// // Luk popup når man klikker på krydset
+// document.querySelector("#popup-luk").addEventListener("click", function () {
+//   document.querySelector("#popup").style.display = "none";
+// });
+
+
+//Christoffers artist kode
  });
- 
