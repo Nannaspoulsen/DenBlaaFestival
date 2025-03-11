@@ -24,12 +24,21 @@ p {
 /* FORSIDE */
 /* ---------------------------------------------------------------- */
 .navbar {
-  height: 200px;
+  height: 100px;
   width: 100%;
   bottom: 0px;
   position: fixed;
   z-index: 9999;
-  background-color: hotpink;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0px -5px 10px 2px rgba(0, 0, 0, 0.75);
+}
+.navbar svg {
+  padding: 15px 0;
+  width: 70px;
+  height: 70px;
+  
 }
 /* ---------------------------------------------------------------- */
 /* Hero Picture */
@@ -48,13 +57,9 @@ header img {
 /* --------------------------------------------------------------- */
 /* SECTION 1 */
 main {
-  display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   margin: 1rem;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
 }
 
 /* --------------------------------------------------------------- */
@@ -65,7 +70,6 @@ main {
 }
 
 section {
-  display: flex;
   margin: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 4rem;
@@ -106,32 +110,32 @@ section {
 footer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 3rem 0;
 }
 
 .FooterLogo {
-  width: 100px;
-  height: 80px;
-}
-
-.FooterLogo img {
-  width: 100%;
+  width: 200px;
   height: 100%;
   object-fit: cover;
+  padding-bottom: 15px;
 }
 
 .logos {
   display: flex;
-  justify-content: space-around;
-  width: 8rem;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
 .logo {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
 }
+
+.spacer {
+  height: 150px;
+}
+
 
 /* ---------------------------------------------------------------- */
 /* Program-Lokation */

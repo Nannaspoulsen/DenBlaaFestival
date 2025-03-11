@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+   document.addEventListener("DOMContentLoaded", () => {
     const events = [
         {
             spillested: "John Bull Pub",
@@ -91,54 +91,35 @@ document.addEventListener("DOMContentLoaded", () => {
             spilletid: "Lørdag, kl. 22:00",
             beskrivelse: "Lorem Ipsum.........."
         }
-    ];
+    ]; // Christoffers artist kode
+    const artistContainer = document.getElementById("artist-container");
+    
 
-    const eventsContainer = document.getElementById("events-container1");
-    if (!eventsContainer) {
-        console.warn("Elementet #events-container1 blev ikke fundet!");
+    if (!artistContainer) {
+        console.warn("Elementet #artist-container blev ikke fundet!");
         return;
     }
 
-    // Grupér events efter spillested
-    const groupedEvents = {};
-    events.forEach(event => {
-        if (!groupedEvents[event.spillested]) {
-            groupedEvents[event.spillested] = [];
-        }
-        groupedEvents[event.spillested].push(event);
+    // Fjern dubletter og sorter alfabetisk
+    const uniqueArtists = [...new Map(events.map(event => [event.artist, event])).values()]
+        .sort((a, b) => a.artist.localeCompare(b.artist));
+
+    // Opret kort til hver artist
+    uniqueArtists.forEach(({ artist, billede }) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const img = document.createElement("img");
+        img.src = billede || "./assets/img/default.jpg"; // Brug default-billede hvis mangler
+        // img.alt = artist;
+        img.classList.add("artist-image");
+
+        const name = document.createElement("p");
+        name.textContent = artist;
+
+        card.appendChild(img);
+        card.appendChild(name);
+        artistContainer.appendChild(card);
+        
     });
-
-    // Opret kortene i HTML
-    for (const [spillested, eventList] of Object.entries(groupedEvents)) {
-        const spillestedDiv = document.createElement("div");
-        spillestedDiv.classList.add("spillested-card");
-
-        const spillestedHeader = document.createElement("h2");
-        spillestedHeader.textContent = spillested;
-        spillestedDiv.appendChild(spillestedHeader);
-
-        eventList.forEach(event => {
-            const eventDiv = document.createElement("div");
-            eventDiv.classList.add("event-card");
-
-            const artistLink = document.createElement("a");
-            artistLink.href = "#";
-            artistLink.textContent = event.artist;
-            artistLink.classList.add("artist-link");
-
-            artistLink.addEventListener("click", () => {
-                showPopup(event);
-            });
-
-            const spilletidP = document.createElement("p");
-            spilletidP.textContent = event.spilletid;
-
-            eventDiv.appendChild(artistLink);
-            eventDiv.appendChild(spilletidP);
-            spillestedDiv.appendChild(eventDiv);
-        });
-
-        eventsContainer.appendChild(spillestedDiv);
-    }
-
-  })
+});
